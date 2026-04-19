@@ -1,0 +1,16 @@
+#pragma once
+
+#include <memory>
+
+struct UserFacingImpl;
+
+class UserFacing
+{
+public:
+    UserFacing();
+
+    int getNumber() const;
+
+private:
+    std::shared_ptr<UserFacingImpl> m_pimpl;
+};
