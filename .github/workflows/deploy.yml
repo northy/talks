@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: nci --with-deps
       - name: Build
-        run: nr build --base /${{github.event.repository.name}}/knockin-on-headers-door/
+        run: nr build --base /knockin-on-headers-door/
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:

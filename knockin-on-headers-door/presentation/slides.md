@@ -16,7 +16,7 @@ info: |
 
   The source code for the presentation, code snippets and feature testing can be found at the [git repository](https://github.com/northy/talks/knockin-on-headers-door).
 
-  [Knockin' on Header's Door: An Overview of C++ Modules (slides)](https://northy.github.io/talks/knockin-on-headers-door) © 2025 by [Alexsandro Thomas](https://github.com/northy) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+  [Knockin' on Header's Door: An Overview of C++ Modules (slides)](https://talks.alexsand.ro/knockin-on-headers-door) © 2025 by [Alexsandro Thomas](https://github.com/northy) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 titleTemplate: '%s'
 exportFilename: knockin-on-headers-door
