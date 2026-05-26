@@ -1,7 +1,7 @@
 {
   "name": "knockin-on-headers-door-presentation",
   "description": "Presentation project for the talk 'Knockin' on headers door'",
-  "homepage": "https://northy.github.io/knockin-on-headers-door",
+  "homepage": "https://talks.alexsand.ro/knockin-on-headers-door",
   "license": "(CC-BY-4.0 AND MIT)",
   "author": {
     "name": "Alexsandro Thomas",
@@ -10,8 +10,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/northy/knockin-on-headers-door.git",
-    "directory": "presentation"
+    "url": "git+https://github.com/northy/talks.git",
+    "directory": "knockin-on-headers-door/presentation"
   },
   "dependencies": {
     "@iconify-json/devicon": "^1.2.45",
