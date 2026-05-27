@@ -168,20 +168,6 @@ shared_ptr(const shared_ptr<Y>& r, T* ptr) noexcept;
 
 </v-clicks>
 
-<v-click>
-
-The whole thing, hand-rolled:
-
-```cpp
-template <class T, class Y>
-struct AliasedPtr {
-    std::shared_ptr<Y> owner;  // co-owns: keeps the object alive
-    T*                 ptr;    // non-owns: what you actually access
-};
-```
-
-</v-click>
-
 ---
 layout: default
 ---
@@ -206,17 +192,9 @@ layout: default
 
 `static_pointer_cast` & friends are aliasing in disguise **by specification**:
 
-```cpp [<memory> ~i-vscode-icons:file-type-cppheader~]
-// [util.smartptr.shared.cast]
-template<class T, class U>
-  shared_ptr<T> static_pointer_cast(const shared_ptr<U>& r) noexcept;
-```
-
-<v-click>
-
 > *Returns:* `shared_ptr<T>(r, static_cast<...>(r.get()))`
 
-</v-click>
+<br>
 
 <v-click>
 
@@ -234,8 +212,6 @@ Hand out `shared_ptr<Member>` from a parent `shared_ptr<Parent>`, without copyin
 
 <br><br>
 
-<div class="grid grid-cols-2 gap-x-6 items-center">
-
 ```cpp [main.cpp ~i-vscode-icons:file-type-cpp~]{*|1|3|4|6-7|*}{at: 1}
 struct Parent { Member m; };
 
@@ -245,27 +221,6 @@ std::shared_ptr<Member> mem(p, &p->m);
 assert(p.use_count() == 2);
 // Parent stays alive as long as mem lives.
 ```
-
-<div>
-
-<v-click at=5>
-
-What you *don't* need:
-
-</v-click>
-
-<v-clicks at=5>
-
-- `enable_shared_from_this`
-- a second heap allocation
-- to modify `Member` at all
-- to remember the parent
-
-</v-clicks>
-
-</div>
-
-</div>
 
 ---
 layout: default
@@ -290,14 +245,6 @@ assert(parent.use_count() == 2);
 - The token can outlive every named `parent` reference
 
 </v-clicks>
-
-<v-click at=7>
-
-<br>
-
-*Hand out the lifetime, not the object.*
-
-</v-click>
 
 ---
 layout: default
@@ -327,7 +274,7 @@ std::shared_ptr<Renderer> Widget::renderer() {
 
 - Caller never sees `Impl`, header stays ABI-stable
 - The `Renderer` alias pins `Impl` until the last handle is gone
-- `Widget` itself can die first; the consumer keeps using `Renderer` safely
+- `Widget` itself can die first
 
 </v-clicks>
 
@@ -370,21 +317,18 @@ layout: default
 
 <br>
 
-```cpp [bindings.cpp ~i-vscode-icons:file-type-cpp~]{*|1-4|7|8}{at: 1}
+```cpp [bindings.cpp ~i-vscode-icons:file-type-cpp~]
 struct JobHolder {
     std::shared_ptr<Engine> engine;  // declared first → outlives `job`
     Job                     job;     // the thing we hand out
 };
-
-std::shared_ptr<Job> share_job(std::shared_ptr<Engine> engine) {
-    auto h = std::make_shared<JobHolder>(engine, engine->make_job());
-    return std::shared_ptr<Job>(h, &h->job);   // aliasing: pins the bundle
-}
 ```
+
+<br>
 
 <div class="grid grid-cols-2 gap-x-6 mt-4">
 
-<v-click at=4>
+<v-click>
 
 **Python's view**
 
@@ -393,7 +337,7 @@ Holds only a `Job`.
 
 </v-click>
 
-<v-click at=5>
+<v-click>
 
 **C++'s view**
 
@@ -425,17 +369,9 @@ vec->push_back({});                               // may reallocate → buffer m
 
 <v-click at=7>
 
-> Aliasing protects against **the parent dying**.
-> It does **not** protect against the parent invalidating its own interior pointers.
+Aliasing protects against **the parent dying**.
 
-</v-click>
-
-<v-click at=8>
-
-*Other things the type system won't catch:*
-- string SBO moves
-- `unordered_map` rehash
-- `operator==` vs `owner_before`
+It does **not** protect against the parent invalidating its own interior pointers.
 
 </v-click>
 
