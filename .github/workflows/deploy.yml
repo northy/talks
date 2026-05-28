@@ -16,21 +16,22 @@ jobs:
       run:
         working-directory: ./knockin-on-headers-door/presentation
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           lfs: true
       - name: Setup Node JS
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 'lts/*'
-      - name: Setup @antfu/ni
-        run: npm i -g @antfu/ni
+          cache: 'npm'
+          cache-dependency-path: knockin-on-headers-door/presentation/package-lock.json
       - name: Install dependencies
-        run: nci --with-deps
+        timeout-minutes: 10
+        run: npm ci --prefer-offline --no-audit --no-fund --foreground-scripts --loglevel=verbose
       - name: Build
-        run: nr build --base /knockin-on-headers-door/
+        run: npm run build -- --base /knockin-on-headers-door/
       - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: knockin-on-headers-door
           path: knockin-on-headers-door/presentation/build
@@ -41,21 +42,22 @@ jobs:
       run:
         working-directory: ./lightning-talks/shared-ptr-aliasing-ctor
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           lfs: true
       - name: Setup Node JS
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 'lts/*'
-      - name: Setup @antfu/ni
-        run: npm i -g @antfu/ni
+          cache: 'npm'
+          cache-dependency-path: lightning-talks/shared-ptr-aliasing-ctor/package-lock.json
       - name: Install dependencies
-        run: nci --with-deps
+        timeout-minutes: 10
+        run: npm ci --prefer-offline --no-audit --no-fund --foreground-scripts --loglevel=verbose
       - name: Build
-        run: nr build --base /lightning/shared-ptr-aliasing-ctor/
+        run: npm run build -- --base /lightning/shared-ptr-aliasing-ctor/
       - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: shared-ptr-aliasing-ctor
           path: lightning-talks/shared-ptr-aliasing-ctor/build
@@ -65,19 +67,19 @@ jobs:
     needs: [build-knockin-on-headers-door, build-shared-ptr-aliasing-ctor]
     steps:
       - name: Download knockin-on-headers-door
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: knockin-on-headers-door
           path: site/knockin-on-headers-door
       - name: Download shared-ptr-aliasing-ctor
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: shared-ptr-aliasing-ctor
           path: site/lightning/shared-ptr-aliasing-ctor
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v6
       - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: site
   deploy:
@@ -93,4 +95,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
