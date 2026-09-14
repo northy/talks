@@ -1,0 +1,15 @@
+# humidity-stats: the small, agreed check set we gate on.
+# Start narrow: name individual checks, not whole groups. Each one earns its
+# place by finding real bugs with little noise. Grow the list deliberately.
+Checks: >
+  -*,
+  bugprone-narrowing-conversions,
+  bugprone-integer-division,
+  bugprone-use-after-move,
+  performance-for-range-copy,
+  performance-unnecessary-value-param
+
+# The checks we trust hard-fail the build; everything else stays advisory.
+WarningsAsErrors: 'bugprone-*'
+
+HeaderFilterRegex: '.*'

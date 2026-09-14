@@ -1,0 +1,9 @@
+# All build artifacts and regeneratable command captures live in per-chapter
+# build/ directories (created by the run-all.sh scripts). Snapshot folders
+# (0-initial .. 4-post-profiling) must stay pristine: never write into them.
+build/
+
+# Safety net for stray compiler/profiler droppings
+*.dSYM/
+*.profraw
+*.profdata

@@ -1,0 +1,41 @@
+{
+  "name": "b2b-code-analysis-presentation",
+  "description": "Back to Basics: Code Analysis",
+  "license": "(CC-BY-4.0 AND MIT)",
+  "author": {
+    "name": "Alexsandro Thomas",
+    "email": "alexsandrogthomas@gmail.com",
+    "url": "https://github.com/northy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/northy/talks.git",
+    "directory": "b2b-code-analysis/presentation"
+  },
+  "dependencies": {
+    "@iconify-json/devicon": "^1.2.62",
+    "@iconify-json/devicon-plain": "^1.2.57",
+    "@iconify-json/emojione": "^1.2.3",
+    "@iconify-json/solar": "^1.2.5",
+    "@iconify-json/vscode-icons": "^1.2.67",
+    "@slidev/cli": "^52.18.0",
+    "@slidev/theme-default": "^0.25.0",
+    "playwright-chromium": "^1.61.1",
+    "qrcode": "^1.5.4"
+  },
+  "overrides": {
+    "dompurify": "^3.4.12"
+  },
+  "scripts": {
+    "serve": "slidev slides.md --port 3030",
+    "build": "slidev build slides.md --out build --download --output build/b2b-code-analysis.pdf",
+    "export": "slidev export slides.md --wait 10000"
+  },
+  "allowScripts": {
+    "fsevents@2.3.3": true,
+    "playwright-chromium@1.61.1": true
+  },
+  "devDependencies": {
+    "@types/qrcode": "^1.5.6"
+  }
+}
