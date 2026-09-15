@@ -26,9 +26,7 @@ flowchart LR
 
 <template #1>
 
-<Transform :scale="0.8">
-
-```mermaid
+```mermaid {scale: 0.8}
 flowchart LR
   q{"What am I trying to learn<br/>about this code?"}
   q --> qs["Can I find issues<br/>before I even run it?"]
@@ -44,8 +42,6 @@ flowchart LR
 
   classDef rounded rx:15, ry:15
 ```
-
-</Transform>
 
 </template>
 
@@ -365,15 +361,15 @@ layout: default
 title: Analysis, tests, review
 ---
 
-## Analysis complements tests and review
+## Analysis, tests, and review
 
 <br>
 
-* Checks assert what the program should do, code analysis checks how it does it
+* Checks assert what the program should do, code reviews verify how it does it
 
 <v-clicks depth="2">
 
 * Review catches design and intent problems no other tool can see
-   * Analysis scales to every line of every build, reviewers can't (and shouldn't!)
+   * Tools scale to every line of every build, reviewers can't (and shouldn't!)
 
 </v-clicks>

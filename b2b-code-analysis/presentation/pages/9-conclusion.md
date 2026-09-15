@@ -52,9 +52,7 @@ layout: fact
 title: 'The question map: complete'
 ---
 
-<Transform :scale="0.8">
-
-```mermaid
+```mermaid {scale: 0.8}
 flowchart LR
   q{"What am I trying to learn<br/>about this code?"}
   q --> qs["Can I find issues<br/>before I even run it?"]
@@ -70,8 +68,6 @@ flowchart LR
 
   classDef rounded rx:15, ry:15
 ```
-
-</Transform>
 
 ---
 layout: default
